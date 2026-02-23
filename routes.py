@@ -22,6 +22,7 @@ db = database()
 def home():
     return render_template('index.html')
 
-@app.route('/leaderboard')
+@app.route('/leaderboard', methods=['GET'])
 def leaderboard():
-    return render_template('leaderboardDisplay.html')
+    data = db.queryDB("SELECT Metrics.ovr, Business.Name FROM Metrics, Business WHERE Metrics.business_id = Business.business_id")
+    return render_template('leaderboardDisplay.html', data=data)
