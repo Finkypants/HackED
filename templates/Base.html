@@ -14,9 +14,6 @@
   .custom-navbar .nav-link {
     color: #ffffff; /* white text */
   }
-  .custom-navbar .nav-link.active {
-    color: #ffffff; /* active link stays white */
-  }
   .custom-navbar .nav-link:hover {
     color: #dddddd; /* slightly lighter on hover */
   }
@@ -44,12 +41,18 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="{{url_for('leaderboard')}}">Leaderboard</a>
+            <a class="nav-link" href="{{ url_for('leaderboard') }}">Leaderboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{url_for('login')}}">Admin Login</a>
+            <a class="nav-link" href="{{ url_for('login') }}">Admin Login</a>
           </li>
         </ul>
+
+        <!-- Search bar -->
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+          <button class="btn btn-outline-light" type="submit">Search</button>
+        </form>
       </div>
     </div>
   </nav>
@@ -57,5 +60,4 @@
   {% block content %}
   {% endblock %}
 </body>
-
 </html>
