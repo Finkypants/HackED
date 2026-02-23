@@ -7,10 +7,7 @@ from functools import wraps
 def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if not session.get("user"):
-            flash("You must be logged in to view this page","warning")
-            return redirect(url_for('login'))
-        elif not session.get('admin'):
+        if not session.get('admin'):
             flash("You do not have permission to view this page","danger")
         return f(*args, **kwargs)
     return decorated_function
@@ -26,3 +23,35 @@ def home():
 def leaderboard():
     data = db.queryDB("SELECT Business.Name, Metrics.ovr FROM Metrics, Business WHERE Metrics.business_id = Business.business_id ORDER BY Metrics.ovr DESC")
     return render_template('leaderboardDisplay.html', data=data)
+
+@app.route('/admin_login', methods=['GET','POST'])
+def login():
+    if request.method == "POST":
+        user = request.form["user"]
+        password = request.form["pass"]
+
+        if "admin" in session:
+            print("Already logged in")
+            return redirect(url_for('admin'))
+        
+        found_user = db.queryDB("SELECT * FROM Admin WHERE user = ?", [user])
+
+        if found_user:
+            stored_password = found_user[0][2]
+            if stored_password == password:
+                session['admin'] = user
+                print("Login Successful")
+                return redirect(url_for("admin"))
+            else:
+                print("Incorrect Password")
+        else:
+            print("User Not Found")
+        return render_template('adminLogin.html')
+    
+    
+    return render_template('adminLogin.html')
+
+@app.route('/admin')
+@admin_required
+def admin():
+    return render_template('admin.html')
