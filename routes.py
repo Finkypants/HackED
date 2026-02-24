@@ -5,6 +5,7 @@ import hashlib
 from functools import wraps
 import os
 from dotenv import load_dotenv
+import datetime
 
 def admin_required(f):
     @wraps(f)
@@ -58,10 +59,20 @@ def leaderboard():
         SELECT Business.Name, Metrics.ovr
         FROM Metrics
         JOIN Business ON Metrics.business_id = Business.business_id
-        ORDER BY Metrics.ovr DESC
+        ORDER BY Metrics.ovr DESC, Metrics.date DESC
     """)
+    businesses = db.queryDB("SELECT Business.Name FROM Business")
+
+    found = {}
+    for count in range(len(businesses)): found[businesses[count][0]] = False
+
+    newData = []
+    for count in range(len(data)):
+        if found[data[count][0]] is False:
+            newData.append([data[count][0], data[count][1]])
+            found[data[count][0]] = True
     
-    return render_template('leaderboardDisplay.html', data=data)
+    return render_template('leaderboardDisplay.html', leaderboardData=newData)
 
 @app.route('/admin_login', methods=['GET','POST'])
 def login():
@@ -132,7 +143,7 @@ def admin_add_metrics():
         total = carbon + materials + chain + waste + water
         ovr = total / 5
 
-        time = 1 #save current time
+        time = datetime.today().strftime('%Y%m%d')
 
         if business_id and carbon and materials and chain and waste and water and ovr and time:
             db.updateDB('INSERT INTO Metrics (business_id,carbon_intensity,sustainable_materials,supply_chain,wate,water_use,ovr,date) VALUES (?,?,?,?,?,?,?,?)', (business_id,carbon,materials,chain,waste,water,ovr,time))
