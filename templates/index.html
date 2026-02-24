@@ -34,12 +34,12 @@
     <h2 style="color: #2d6969; letter-spacing: 1px; font-weight: 600; margin-bottom: 25px;">Top Performers</h2>
     <div class="winners-grid d-flex justify-content-center flex-wrap gap-2">
         {% for category, data in winners.items() %}
-        <div class="winner-card shadow-sm" style="background-color: #e8e8e8; border: 2px solid #2d6969; border-radius: 10px; width: 140px; padding: 10px; transition: all 0.2s ease;">
+        <div class="winner-card shadow-sm" style="background-color: #FFFF; border: 2px solid #2d6969; border-radius: 10px; width: 140px; padding: 10px; transition: all 0.2s ease;">
             <!-- Badge Icon -->
             <div class="badge-icon badge-{{ category }}" style="margin-bottom: 8px;"></div>
             
             <!-- Category Name -->
-            <h4 style="text-transform: capitalize; color: #2d6969; margin-bottom: 6px; font-size: 0.9rem;">
+            <h4 style="text-transform: capitalize; color: #5A5A5A; margin-bottom: 6px; font-size: 0.9rem;">
                 {{ category|replace('_', ' ') }}
             </h4>
             
