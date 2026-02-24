@@ -1,7 +1,18 @@
+body{
+  overflow-x: hidden;
+}
+
+/*@media(min-width: 768px){
+  footer{
+    display: hidden;
+  }
+} */ /* hide the footer */
+
 @font-face{
     font-family: raleway;
     src: url(raleway.regular.ttf)
 }
+
 
 .raleway {
     font-family: 'Raleway', sans-serif;
