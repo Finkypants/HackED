@@ -48,7 +48,23 @@ def home():
 
 @app.route('/leaderboard', methods=['GET'])
 def leaderboard():
-    data = db.queryDB("SELECT Business.Name, Metrics.ovr FROM Metrics, Business WHERE Metrics.business_id = Business.business_id ORDER BY Metrics.ovr DESC")
+    # 1. Update the 'ovr' (overall) field for all rows by calculating 
+    # the average of the 5 specific metric categories.
+    db.updateDB("""
+        UPDATE Metrics 
+        SET ovr = ROUND((carbon_intensity + sustainable_materials + supply_chain + waste + water_use) / 5.0, 1)
+    """)
+
+    # 2. Fetch the updated data to display on the leaderboard
+    data = db.queryDB("""
+        SELECT Business.Name, Metrics.ovr, Metrics.carbon_intensity, 
+               Metrics.sustainable_materials, Metrics.supply_chain, 
+               Metrics.waste, Metrics.water_use
+        FROM Metrics
+        JOIN Business ON Metrics.business_id = Business.business_id
+        ORDER BY Metrics.ovr DESC
+    """)
+    
     return render_template('leaderboardDisplay.html', data=data)
 
 @app.route('/admin_login', methods=['GET','POST'])
