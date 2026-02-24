@@ -37,19 +37,22 @@
   color: rgb(0, 0, 0);
   font-size: 25px;
   white-space: nowrap;
-  overflow: hidden;
   display: flex;
-  animation: marquee 60s linear infinite;
+  animation: marquee 20s linear infinite;
   
 }
+
+.marquee-content {
+  display: flex;     
+}
+
 .marquee-content p {
   display: inline-block;
-  margin-right: 50px;
 }
 
 @keyframes marquee {
   0% {
-    transform: translateX(0);
+    transform: translateX(0%);
   }
   100% {
     transform: translateX(-50%);
