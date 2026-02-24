@@ -30,12 +30,11 @@
     </p>
 </div>
 
-<!-- Winners Section -->
 <div class="winners-container mt-5 text-center">
     <h2 style="color: #2d6969; letter-spacing: 1px; font-weight: 600; margin-bottom: 25px;">Top Performers</h2>
     <div class="winners-grid d-flex justify-content-center flex-wrap gap-2">
         {% for category, data in winners.items() %}
-        <div class="winner-card shadow-sm" style="background-color: #f0f0f0; border: 2px solid #2d6969; border-radius: 10px; width: 140px; padding: 10px; transition: all 0.2s ease;">
+        <div class="winner-card shadow-sm" style="background-color: #e8e8e8; border: 2px solid #2d6969; border-radius: 10px; width: 140px; padding: 10px; transition: all 0.2s ease;">
             <!-- Badge Icon -->
             <div class="badge-icon badge-{{ category }}" style="margin-bottom: 8px;"></div>
             
@@ -48,7 +47,7 @@
             <p class="winner-name" style="color: #2d6969; font-weight: 600; font-size: 0.85rem; margin-bottom: 3px;">{{ data[0] }}</p>
             
             <!-- Winner Score -->
-            <p class="winner-score" style="color: #2d6969; font-weight: 500; font-size: 0.8rem;">Score: {{ data[1] }}</p>
+            <p class="winner-score" style="color: #6FBF3F; font-weight: 500; font-size: 0.8rem;">Score: {{ data[1] }}</p>
         </div>
         {% endfor %}
     </div>
@@ -66,8 +65,6 @@
 .winners-grid {
     gap: 15px;
 }
-
-
 </style>
 
 {% endblock %}
