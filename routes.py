@@ -98,16 +98,9 @@ def admin_add_company():
         long = request.form["long"]
         lat = request.form["lat"]
 
-        tick = 0
-        
-        if physical == True:
-            tick = 1
-        elif physical == None:
-            tick = 0
-        else:
-            print("Error, no value.")
+        tick = 1 if physical else 0
 
-        if name and tick and long and lat:
+        if name and long and lat:
             db.updateDB('INSERT INTO Business (Name,is_physical,long,lat) VALUES (?,?,?,?)', (name,tick,long,lat))
 
     return render_template('admin.html')
