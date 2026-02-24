@@ -45,14 +45,17 @@
     </div>
   </nav>
   </header>
-  <!-- Footer -->
-<a href="MailTo:info@fashionfootprint.com" 
-   style="position: fixed; bottom: 10px; right: 20px; font-weight: bold; color: #2d6969; cursor: pointer; text-decoration: none;">
-   Contact Us
-</a>
+
   <main>
     {% block content %}
     {% endblock %}
   </main>
+
+  <footer style="z-index: 99;display: flex; justify-content: flex-end; bottom: 10px; right: 20px; background-color: white; height: fit-content; width: 100%;">
+  <a href="MailTo:info@fashionfootprint.com" 
+   style="font-weight: bold; color: #2d6969; cursor: pointer; text-decoration: none; padding: 20px;">
+   Contact Us
+  </a>
+  </footer>
 </body>
 </html>
