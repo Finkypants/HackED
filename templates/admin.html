@@ -3,8 +3,27 @@
 <h1>Admin Dashboard</h1>
 <p>Add Company</p>
 <form action="/admin_add_company" method="POST">
-
+    <div class="input">
+        <label class="form-label">Business Name</label>
+        <input class="form-control" type="text" id="name" name="name" style="max-width: 30%; justify-content: center;" required>
+    </div>
+     <div class="input">
+        <label class="form-label">Is Physical?</label>
+        <input type="checkbox" id="phys" name="phys">
+    </div>
+     <div class="input">
+        <label class="form-label">Longitude Coord</label>
+        <input class="form-control" step="0.0000000000001"placeholder="Longitude" type="number" id="long" name="long" style="max-width: 30%; justify-content: center;" required>
+    </div>
+     <div class="input">
+        <label class="form-label">Latitude Coord</label>
+        <input class="form-control" step="0.0000000000001" placeholder="Latitude" type="number" id="lat" name="lat" style="max-width: 30%; justify-content: center;" required>
+    </div>
+    <div>
+        <input class="btn btn-primary" style="justify-content: center;" type="submit" name="submit">
+    </div>
 </form>
+
 <p>Edit Company</p>
 <p>Add New Metrics</p>
 {% endblock %}

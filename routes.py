@@ -57,9 +57,38 @@ def login():
     
     return render_template('adminLogin.html')
 
+@app.route('/logout')
+@admin_required
+def logout():
+    session.pop('admin')
+    return redirect(url_for('home'))
+
 @app.route('/admin', methods=['GET', 'POST'])
 @admin_required
 def admin():
+    return render_template('admin.html')
+
+@app.route('/admin_add_company', methods=['GET', 'POST'])
+@admin_required
+def admin_add_company():
+    if request.method == "POST":
+        name = request.form["name"]
+        physical = request.form.get("phys")
+        long = request.form["long"]
+        lat = request.form["lat"]
+
+        tick = 0
+        
+        if physical == True:
+            tick = 1
+        elif physical == None:
+            tick = 0
+        else:
+            print("Error, no value.")
+
+        if name and tick and long and lat:
+            db.updateDB('INSERT INTO Business (Name,is_physical,long,lat) VALUES (?,?,?,?)', (name,tick,long,lat))
+
     return render_template('admin.html')
 
 @app.route('/find_stores', methods=['GET'])
