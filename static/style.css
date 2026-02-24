@@ -1,0 +1,27 @@
+@font-face{
+    font-family: raleway;
+    src: url(raleway.regular.ttf)
+}
+
+.raleway {
+    font-family: 'Raleway', sans-serif;
+}
+
+.custom-navbar {
+    background-color: #2d6969; /* dark green background */
+  }
+  .custom-navbar .navbar-brand,
+  .custom-navbar .nav-link {
+    color: #ffffff; /* white text */
+  }
+  .custom-navbar .nav-link:hover {
+    color: #dddddd; /* slightly lighter on hover */
+  }
+  .custom-navbar .btn-outline-light {
+    border-color: #ffffff;
+    color: #ffffff;
+  }
+  .custom-navbar .btn-outline-light:hover {
+    background-color: #ffffff;
+    color: #2d6969;
+  }
