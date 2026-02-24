@@ -17,9 +17,13 @@ def admin_required(f):
 
 db = database()
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def home():
-    return render_template('index.html')
+    count = 0
+    data = db.queryDB("SELECT * From Business")
+    for i in data:
+        count = count + 1
+    return render_template('index.html', count=count)
 
 @app.route('/leaderboard', methods=['GET'])
 def leaderboard():
