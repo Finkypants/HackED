@@ -2,16 +2,17 @@
 {% block content %}
 <h1>Admin Login</h1>
 <form action="/admin_login" method="POST">
-    <div class="mb-3">
+
+    <div class="input">
         <label class="form-label">User Name</label>
-        <input class="form-control" type="text" id="user" name="user" required="True">
+        <input class="form-control" type="text" id="user" name="user" style="max-width: 30%; justify-content: center;" required>
     </div>
-    <div>
+
+    <div class="input">
         <label class="form-label">Password</label>
+        <input type="password" class="form-control" placeholder="Password" id="pass" name="pass" aria-describedby="passHelp" style="max-width: 30%; justify-content: center;" required>
     </div>
-    <div class="input-group mb-3">
-        <input type="password" class="form-control" placeholder="Password" id="pass" name="pass" aria-describedby="passHelp">
-    </div>
+
     <div>
         <input class="btn btn-primary" style="justify-content: center;" type="submit" name="submit">
     </div>
