@@ -278,23 +278,12 @@ def get_address(lat, lng):
     api_key = os.getenv("MY_API_KEY")
 
     gmaps = googlemaps.Client(key=api_key)
-
-    results = gmaps.reverse_geocode((lat, lng))
-
-    if not results:
-        return "No address found."
-
-    # Look for a real street address first
-    for result in results:
-        if "street_address" in result["types"]:
-            return result["formatted_address"]
-
-    # Fallback to route-level address
-    for result in results:
-        if "route" in result["types"]:
-            return result["formatted_address"]
-
-    # Last fallback
-    return results[0]["formatted_address"]
     
-
+    # Reverse Geocoding
+    reverse_geocode_result = gmaps.reverse_geocode((lat, lng))
+    
+    if reverse_geocode_result:
+        # Returns the first formatted address match
+        return reverse_geocode_result[0]['formatted_address']
+    else:
+        return "No address found."
