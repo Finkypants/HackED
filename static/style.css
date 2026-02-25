@@ -1,5 +1,8 @@
 body{
   overflow-x: hidden;
+  background-image: url(backing.jpg);
+  background-size:cover;
+  height: 100vh;
 }
 
 /*@media(min-width: 768px){
@@ -67,12 +70,6 @@ body{
   100% {
     transform: translateX(-50%);
   }
-}
-
-main{
-  background-image: url(backing.jpg);
-  background-size: cover;
-  height: 100vh;
 }
 
 /* Container and Card Styles */

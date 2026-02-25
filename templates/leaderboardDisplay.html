@@ -2,45 +2,47 @@
 
 {% block content %}
 
-<div class="container mt-5" style="z-index: -1;">
+<div class="container mt-5">
     <div class="card mx-auto shadow-lg" style="max-width: 900px; border: 3px solid #2d6969; background-color: #f0f0f0;">
         <div class="card-body">
             <h2 class="text-center mb-4" style="color: #2d6969; letter-spacing: 1px; font-weight: 600;">Leaderboard</h2>
             
             <div class="d-flex flex-column gap-3">
                 {% for item in leaderboardData %}
-                <div class="d-flex justify-content-between align-items-center p-3 leaderboard-row
-                    {% if loop.index == 1 %} top-gold
-                    {% elif loop.index == 2 %} top-silver
-                    {% elif loop.index == 3 %} top-bronze
-                    {% endif %}"
-                     style="border: 2px solid #2d6969; border-radius: 10px; transition: all 0.2s ease;">
-                    <!-- Ranking number with # -->
-                    <span class="rank-number" style="color: #2d6969; font-weight: 600; font-size: 1.1rem; width: 30px; text-align: center;">#{{ loop.index }}</span>
-                    <!-- Company name -->
-                     <a href="{{ url_for('profile', business_id=item[3]) }}" style="text-decoration: none; flex: 1; margin-left: 10px;">
-                        <span style="color: #2d6969; font-weight: 600; font-size: 1.1rem;">{{ item[0] }}</span>
-                    </a>
-                    <!-- Score -->
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="color: #2d6969; font-weight: 500; font-size: 1.05rem;">
-                            {{ item[1] }}
+                <a href="{{ url_for('profile', business_id=item[3]) }}" style="text-decoration: none;">
+                    <div class="d-flex justify-content-between align-items-center p-3 leaderboard-row
+                        {% if loop.index == 1 %} top-gold
+                        {% elif loop.index == 2 %} top-silver
+                        {% elif loop.index == 3 %} top-bronze
+                        {% endif %}"
+                         style="border: 2px solid #2d6969; border-radius: 10px; transition: all 0.2s ease; width: 100%;">
+                        <!-- Ranking number with # -->
+                        <span class="rank-number" style="color: #2d6969; font-weight: 600; font-size: 1.1rem; width: 30px; text-align: center;">#{{ loop.index }}</span>
+                        
+                        <!-- Company name -->
+                        <span style="color: #2d6969; font-weight: 600; font-size: 1.1rem; flex: 1; margin-left: 10px;">
+                            {{ item[0] }}
                         </span>
-                        <!-- Arrows -->
-                        {% if item[2] == "up" %}
-                            <div class="arrow green-arrow"></div>
-                        {% elif item[2] == "down" %}
-                            <div class="arrow red-arrow"></div>
-                        {% endif %}
+                        
+                        <!-- Score + arrows -->
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #2d6969; font-weight: 500; font-size: 1.05rem;">
+                                {{ item[1] }}
+                            </span>
+                            {% if item[2] == "up" %}
+                                <div class="arrow green-arrow"></div>
+                            {% elif item[2] == "down" %}
+                                <div class="arrow red-arrow"></div>
+                            {% endif %}
+                        </div>
                     </div>
-                </div>
+                </a>
                 {% endfor %}
             </div>
 
         </div>
     </div>
 </div>
-
 <style>
 .arrow {
     width: 25px;

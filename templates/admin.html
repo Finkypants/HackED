@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
+
 {% block content %}
 <div class="admin-dashboard">
 
-    <h1 style="text-align: center; color: #2d6969; font-weight: 700;">Admin Dashboard</h1>
+    <h1 class="dashboard-title">Admin Dashboard</h1>
 
     <!-- Add Company -->
     <div class="card shadow-lg admin-card">
-        <h3 style="color: #2d6969; margin-bottom: 20px;">Add Company</h3>
+        <h3>Add Company</h3>
         <form action="/admin_add_company" method="POST" class="d-flex flex-column gap-3">
 
             <div class="input">
@@ -14,7 +15,7 @@
                 <input class="form-control styled-input" type="text" id="name" name="name" required>
             </div>
 
-            <div class="input" style="display: flex; align-items: center; gap: 10px;">
+            <div class="input checkbox-input">
                 <input type="checkbox" id="phys" name="phys">
                 <label class="form-label" for="phys">Is Physical?</label>
             </div>
@@ -37,7 +38,7 @@
 
     <!-- Edit Company -->
     <div class="card shadow-lg admin-card">
-        <h3 style="color: #2d6969; margin-bottom: 20px;">Edit Company</h3>
+        <h3>Edit Company</h3>
         <form action="/admin_edit_company" method="POST" class="d-flex flex-column gap-3">
 
             <select id="biz" name="biz" class="styled-select" required>
@@ -52,7 +53,7 @@
                 <input class="form-control styled-input" type="text" id="name" name="name" required>
             </div>
 
-            <div class="input" style="display: flex; align-items: center; gap: 10px;">
+            <div class="input checkbox-input">
                 <input type="checkbox" id="phys" name="phys">
                 <label class="form-label" for="phys">Is Physical?</label>
             </div>
@@ -75,7 +76,7 @@
 
     <!-- Add New Metrics -->
     <div class="card shadow-lg admin-card">
-        <h3 style="color: #2d6969; margin-bottom: 20px;">Add New Metrics</h3>
+        <h3>Add New Metrics</h3>
         <form action="/admin_add_metrics" method="POST" class="d-flex flex-column gap-3">
 
             <select id="biz" name="biz" class="styled-select" required>
@@ -119,13 +120,14 @@
 </div>
 
 <style>
+/* Layout */
 .admin-dashboard {
-    font-family: raleway;
+    font-family: raleway, sans-serif;
     max-width: 900px;
-    margin: 40px auto;
+    margin: 40px auto 80px; /* add bottom space so footer is not overlapped */
     display: flex;
     flex-direction: column;
-    gap: 40px; /* spacing between cards */
+    gap: 40px;
 }
 
 /* Cards styling */
@@ -181,5 +183,20 @@
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
+
+/* Checkbox layout */
+.checkbox-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Dashboard title */
+.dashboard-title {
+    text-align: center;
+    color: #2d6969;
+    font-weight: 700;
+}
 </style>
+
 {% endblock %}
