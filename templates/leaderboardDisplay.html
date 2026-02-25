@@ -20,15 +20,17 @@
                     <!-- Company name -->
                     <span style="color: #2d6969; font-weight: 600; font-size: 1.1rem; flex: 1; margin-left: 10px;">{{ item[0] }}</span>
                     <!-- Score -->
-                    <span style="color: #2d6969; font-weight: 500; font-size: 1.05rem;">
-                        {{ item[1] }}
-
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="color: #2d6969; font-weight: 500; font-size: 1.05rem;">
+                            {{ item[1] }}
+                        </span>
+                        <!-- Arrows -->
                         {% if item[2] == "up" %}
-                            <span style="color: green; font-weight: bold;">&#8593;</span>
+                            <div class="arrow green-arrow"></div>
                         {% elif item[2] == "down" %}
-                            <span style="color: red; font-weight: bold;">&#8595;</span>
+                            <div class="arrow red-arrow"></div>
                         {% endif %}
-                    </span>
+                    </div>
                 </div>
                 {% endfor %}
             </div>
@@ -38,6 +40,20 @@
 </div>
 
 <style>
+.arrow {
+    width: 25px;
+    height: 25px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.green-arrow { 
+    background-image: url('{{ url_for("static", filename="greenArrow.png") }}'); 
+}
+.red-arrow { 
+    background-image: url('{{ url_for("static", filename="redArrow.png") }}'); 
+}
+
 /* Hover shadow for all rows */
 .leaderboard-row:hover {
     transform: translateY(-2px);
