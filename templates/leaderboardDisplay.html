@@ -1,8 +1,4 @@
-{% extends 'base.html' %}
-
-{% block content %}
-
-<div class="container mt-5">
+<div class="container mt-5 mb-5"> <!-- added mb-5 -->
     <div class="card mx-auto shadow-lg" style="max-width: 900px; border: 3px solid #2d6969; background-color: #f0f0f0;">
         <div class="card-body">
             <h2 class="text-center mb-4" style="color: #2d6969; letter-spacing: 1px; font-weight: 600;">Leaderboard</h2>
@@ -43,49 +39,3 @@
         </div>
     </div>
 </div>
-<style>
-.arrow {
-    width: 25px;
-    height: 25px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-.green-arrow { 
-    background-image: url('{{ url_for("static", filename="greenArrow.png") }}'); 
-}
-.red-arrow { 
-    background-image: url('{{ url_for("static", filename="redArrow.png") }}'); 
-}
-
-/* Hover shadow for all rows */
-.leaderboard-row:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-/* Top 3 specific styles */
-.top-gold {
-    background-color: #FFD700;
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-}
-.top-silver {
-    background-color: #C0C0C0;
-    box-shadow: 0 0 15px rgba(192, 192, 192, 0.5);
-}
-.top-bronze {
-    background-color: #CD7F32;
-    box-shadow: 0 0 15px rgba(205, 127, 50, 0.5);
-}
-
-/* Animated ranking number */
-.rank-number {
-    display: inline-block;
-    transition: transform 0.2s ease;
-}
-.leaderboard-row:hover .rank-number {
-    transform: scale(1.2) rotate(-5deg);
-}
-</style>
-
-{% endblock %}
