@@ -3,22 +3,24 @@
 <div class="comparisons">
     <h1 style="text-align: center; margin-top: 10px; color: #2d6969; font-weight: 700;">Business Comparison Tool</h1>
     
-    <form method="POST" class="header-controls">
+    <form method="POST" class="header-controls" onsubmit="return validateComparison();">
         <div class="compare-container">
-            <select name="biz1">
+            <select name="biz1" id="biz1">
                 <option value="">Select Business 1</option>
                 {% for b in businesses %}
                 <option value="{{ b[0] }}" {{ 'selected' if b[0] == id1 else '' }}>{{ b[1] }}</option>
                 {% endfor %}
             </select>
 
-            <select name="biz2">
+            <select name="biz2" id="biz2">
                 <option value="">Select Business 2</option>
                 {% for b in businesses %}
                 <option value="{{ b[0] }}" {{ 'selected' if b[0] == id2 else '' }}>{{ b[1] }}</option>
                 {% endfor %}
             </select>
         </div>
+        <!-- Alert message container -->
+        <div id="alert-msg" style="text-align:center; margin-top:10px; color:#b71c1c; font-weight:bold; display:none;"></div>
         <button class="enters" type="submit">Compare Statistics</button>
     </form>
 
@@ -54,7 +56,6 @@
     font-family: raleway; 
 }
 
-/* Layout for select and button */
 .compare-container { 
     display: flex; 
     justify-content: center; 
@@ -82,9 +83,13 @@ select {
     cursor: pointer; 
     font-size: 16px; 
     margin-top: 10px; 
+    transition: all 0.3s ease;
 }
+
 .enters:hover { 
     background-color: #1f4f4f; 
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
 .header-controls { 
@@ -92,19 +97,20 @@ select {
     margin-bottom: 40px; 
 }
 
-/* Business Columns */
 .biz-column { 
     width: 45%; 
     border: 2px solid #2d6969; 
     padding: 20px; 
     border-radius: 10px; 
     box-shadow: 2px 4px 12px rgba(0,0,0,0.1); 
-    background-color: #d6d6d6; 
+    background-color: #f5f5f5; 
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .result-column { 
     background-color: #ffffff; 
+    border-left: 4px solid #2d6969; 
+    border-right: 4px solid #2d6969;
 }
 
 .biz-column:hover {
@@ -112,7 +118,6 @@ select {
     box-shadow: 0 6px 15px rgba(0,0,0,0.15);
 }
 
-/* Stat rows */
 .stat-row { 
     margin-bottom: 15px; 
     padding: 8px; 
@@ -121,21 +126,52 @@ select {
     font-weight: 500;
 }
 
-/* Make values consistent width and height */
 .stat-row span {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    min-width: 60px; /* adjust to your longest value */
+    min-width: 60px;
     padding: 4px 8px;
     border-radius: 4px;
 }
 
-/* Green highlight */
 .green-bg { 
     background-color: #d4edda; 
     color: #155724; 
     font-weight: bold; 
 }
+
+/* Alert message style */
+#alert-msg {
+    background-color: #ffe6e6;
+    border: 1px solid #b71c1c;
+    border-radius: 5px;
+    padding: 10px;
+    font-weight: bold;
+    display: none;
+}
 </style>
+
+<script>
+function validateComparison() {
+    const biz1 = document.getElementById('biz1').value;
+    const biz2 = document.getElementById('biz2').value;
+    const alertMsg = document.getElementById('alert-msg');
+
+    if (biz1 === '' || biz2 === '') {
+        alertMsg.textContent = 'Please select two businesses to compare.';
+        alertMsg.style.display = 'block';
+        return false;
+    }
+
+    if (biz1 === biz2) {
+        alertMsg.textContent = 'You cannot compare the same business.';
+        alertMsg.style.display = 'block';
+        return false;
+    }
+
+    alertMsg.style.display = 'none';
+    return true; // allow submission
+}
+</script>
 {% endblock %}

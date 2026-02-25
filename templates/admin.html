@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="admin-dashboard" style="font-family: raleway; max-width: 900px; margin: 40px auto;">
+<div class="admin-dashboard">
 
     <h1 style="text-align: center; color: #2d6969; font-weight: 700;">Admin Dashboard</h1>
 
     <!-- Add Company -->
-    <div class="card shadow-lg mb-5" style="padding: 30px; border: 3px solid #2d6969; background-color: #f0f0f0; border-radius: 12px;">
+    <div class="card shadow-lg admin-card">
         <h3 style="color: #2d6969; margin-bottom: 20px;">Add Company</h3>
         <form action="/admin_add_company" method="POST" class="d-flex flex-column gap-3">
 
@@ -36,7 +36,7 @@
     </div>
 
     <!-- Edit Company -->
-    <div class="card shadow-lg mb-5" style="padding: 30px; border: 3px solid #2d6969; background-color: #f0f0f0; border-radius: 12px;">
+    <div class="card shadow-lg admin-card">
         <h3 style="color: #2d6969; margin-bottom: 20px;">Edit Company</h3>
         <form action="/admin_edit_company" method="POST" class="d-flex flex-column gap-3">
 
@@ -74,7 +74,7 @@
     </div>
 
     <!-- Add New Metrics -->
-    <div class="card shadow-lg mb-5" style="padding: 30px; border: 3px solid #2d6969; background-color: #f0f0f0; border-radius: 12px;">
+    <div class="card shadow-lg admin-card">
         <h3 style="color: #2d6969; margin-bottom: 20px;">Add New Metrics</h3>
         <form action="/admin_add_metrics" method="POST" class="d-flex flex-column gap-3">
 
@@ -115,9 +115,35 @@
             </div>
         </form>
     </div>
+
 </div>
 
 <style>
+.admin-dashboard {
+    font-family: raleway;
+    max-width: 900px;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px; /* spacing between cards */
+}
+
+/* Cards styling */
+.admin-card {
+    padding: 30px;
+    border: 3px solid #2d6969;
+    background-color: #f0f0f0;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* Inputs and buttons */
 .styled-input {
     max-width: 60%;
     height: 45px;
@@ -147,11 +173,13 @@
     color: #ffffff;
     border: none;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 .styled-btn:hover {
     background-color: #1f4f4f;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 </style>
 {% endblock %}
