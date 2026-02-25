@@ -253,8 +253,17 @@ def compare():
 def profile(business_id):
     long = db.queryDB("SELECT long FROM Business WHERE business_id = ?", (business_id,))
     lat = db.queryDB("SELECT lat FROM Business WHERE business_id = ?", (business_id,))
-    data1 = db.queryDB("SELECT * FROM Business WHERE business_id = ?", (business_id,))
+    data1 = db.queryDB("SELECT Name FROM Business WHERE business_id = ?", (business_id,))
+    phys = db.queryDB("SELECT is_physical FROM Business WHERE business_id = ?", (business_id,))
     data2 = db.queryDB("SELECT * FROM Metrics WHERE business_id = ?", (business_id,))
+
+    phys1 = "Blank"
+
+    if phys == 1:
+        phys1 == "Has a physical location"
+    elif phys == 0:
+        phys1 = "Does not have a physical location"
+
 
     addy = get_address(lat[0][0],long[0][0])
 
