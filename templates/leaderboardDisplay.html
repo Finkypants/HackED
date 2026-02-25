@@ -1,7 +1,11 @@
-<div class="container mt-5 mb-5"> <!-- added mb-5 -->
-    <div class="card mx-auto shadow-lg" style="max-width: 900px; border: 3px solid #2d6969; background-color: #f0f0f0;">
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5 mb-5"> <!-- margin-bottom added -->
+    <div class="card mx-auto" style="max-width: 900px; border: 3px solid #2d6969; background-color: #f0f0f0; border-radius: 12px;">
         <div class="card-body">
-            <h2 class="text-center mb-4" style="color: #2d6969; letter-spacing: 1px; font-weight: 600;">Leaderboard</h2>
+            <h2 class="text-center mb-4" style="color: #2d6969; font-weight: 700; letter-spacing: 1px;">Leaderboard</h2>
             
             <div class="d-flex flex-column gap-3">
                 {% for item in leaderboardData %}
@@ -11,16 +15,17 @@
                         {% elif loop.index == 2 %} top-silver
                         {% elif loop.index == 3 %} top-bronze
                         {% endif %}"
-                         style="border: 2px solid #2d6969; border-radius: 10px; transition: all 0.2s ease; width: 100%;">
-                        <!-- Ranking number with # -->
+                         style="border: 2px solid #2d6969; border-radius: 10px; width: 100%; transition: all 0.2s ease;">
+                        
+                        <!-- Ranking number -->
                         <span class="rank-number" style="color: #2d6969; font-weight: 600; font-size: 1.1rem; width: 30px; text-align: center;">#{{ loop.index }}</span>
                         
-                        <!-- Company name -->
+                        <!-- Business name -->
                         <span style="color: #2d6969; font-weight: 600; font-size: 1.1rem; flex: 1; margin-left: 10px;">
                             {{ item[0] }}
                         </span>
                         
-                        <!-- Score + arrows -->
+                        <!-- Score and arrows -->
                         <div style="display: flex; align-items: center; gap: 8px;">
                             <span style="color: #2d6969; font-weight: 500; font-size: 1.05rem;">
                                 {{ item[1] }}
@@ -39,3 +44,57 @@
         </div>
     </div>
 </div>
+
+<style>
+/* Row hover effect */
+.leaderboard-row {
+    background-color: #f0f0f0; /* neutral background, no green bars */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.leaderboard-row:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* Ranking number animation */
+.rank-number {
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+.leaderboard-row:hover .rank-number {
+    transform: scale(1.2) rotate(-5deg);
+}
+
+/* Top 3 highlights */
+.top-gold {
+    background-color: #FFD700;
+}
+.top-silver {
+    background-color: #C0C0C0;
+}
+.top-bronze {
+    background-color: #CD7F32;
+}
+
+/* Arrow icons */
+.arrow {
+    width: 25px;
+    height: 25px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.green-arrow { 
+    background-image: url('{{ url_for("static", filename="greenArrow.png") }}'); 
+}
+.red-arrow { 
+    background-image: url('{{ url_for("static", filename="redArrow.png") }}'); 
+}
+
+/* Ensure spacing from footer */
+.container {
+    margin-bottom: 80px;
+}
+</style>
+
+{% endblock %}
