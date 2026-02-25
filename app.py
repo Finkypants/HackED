@@ -21,5 +21,5 @@ app.permanent_session_lifetime = timedelta(minutes=2)
 import routes
 
 if __name__ == '__main__':
-    app.run(debug=True) # run flask in debug mode
+  #  app.run(debug=True) # run flask in debug mode
     app.run(host="0.0.0.0", port=port)
